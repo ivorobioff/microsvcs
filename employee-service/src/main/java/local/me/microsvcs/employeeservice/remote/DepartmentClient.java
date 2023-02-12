@@ -6,8 +6,8 @@ import org.springframework.web.bind.annotation.PathVariable;
 
 import local.me.microsvcs.employeeservice.entity.Department;
 
-@FeignClient(name = "department", url = "http://localhost:8081/api/departments")
+@FeignClient(name = "DEPARTMENT-SERVICE")
 public interface DepartmentClient {
-    @GetMapping("/{code}")
+    @GetMapping("/api/departments/{code}")
     Department getByCode(@PathVariable("code") String code);
 }
