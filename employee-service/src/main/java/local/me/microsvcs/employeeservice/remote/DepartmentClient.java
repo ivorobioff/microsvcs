@@ -6,8 +6,8 @@ import org.springframework.web.bind.annotation.PathVariable;
 
 import local.me.microsvcs.employeeservice.entity.Department;
 
-@FeignClient(name = "DEPARTMENT-SERVICE")
+@FeignClient(name = "DEPARTMENT-SERVICE", path = "/api/departments", fallback = DepartmentClientFallback.class)
 public interface DepartmentClient {
-    @GetMapping("/api/departments/{code}")
+    @GetMapping("/{code}")
     Department getByCode(@PathVariable("code") String code);
 }
