@@ -5,6 +5,7 @@ import java.time.ZoneOffset;
 
 import org.springframework.stereotype.Service;
 
+import local.me.microsvcs.employeeservice.EmployeeServiceProperties;
 import local.me.microsvcs.employeeservice.entity.Employee;
 import local.me.microsvcs.employeeservice.remote.DepartmentClient;
 import local.me.microsvcs.employeeservice.repository.EmployeeRepository;
@@ -15,10 +16,13 @@ import lombok.AllArgsConstructor;
 public class EmployeeService {
     private EmployeeRepository employeeRepository;
     private DepartmentClient departmentClient;
+    private EmployeeServiceProperties properties;
 
     public Employee create(Employee data) {
         data.setCreatedAt(LocalDateTime.now(ZoneOffset.UTC));
-        return employeeRepository.save(data);
+        var employee = employeeRepository.save(data);
+        employee.setZone(properties.getZone());
+        return employee;
     }
 
     public Employee get(Long id) {
@@ -28,6 +32,8 @@ public class EmployeeService {
             var department = departmentClient.getByCode(employee.getDepartmentCode());
             employee.setDepartment(department);
         }
+
+        employee.setZone(properties.getZone());
 
         return employee;
     }

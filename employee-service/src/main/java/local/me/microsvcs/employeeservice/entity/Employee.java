@@ -54,4 +54,8 @@ public class Employee {
     @JsonProperty(access = Access.READ_ONLY)
     @Column(nullable = false)
     private LocalDateTime createdAt; 
+
+    @Transient
+    @JsonProperty(access = Access.READ_ONLY)
+    private String zone;
 }
