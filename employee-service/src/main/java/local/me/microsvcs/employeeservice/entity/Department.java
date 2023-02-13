@@ -13,4 +13,5 @@ public class Department {
     private String name;
     private String description;
     private String code;
+    private String zone;
 }

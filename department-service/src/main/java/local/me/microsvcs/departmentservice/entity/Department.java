@@ -10,6 +10,7 @@ import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.Table;
+import jakarta.persistence.Transient;
 import jakarta.validation.constraints.NotBlank;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
@@ -39,4 +40,8 @@ public class Department {
 
     @JsonProperty(access = Access.READ_ONLY)
     private LocalDateTime createdAt;
+
+    @Transient
+    @JsonProperty(access = Access.READ_ONLY)
+    private String zone;
 }
